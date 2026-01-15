@@ -1,7 +1,7 @@
-import { app, shell, BrowserWindow } from 'electron'
+import { app, shell, BrowserWindow, ipcMain } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
-import { prepareApp } from '../backend/database'
+import { prepareApp, selectData } from '../backend/database'
 import icon from '../../resources/icon.png?asset'
 
 function createWindow() {
@@ -44,6 +44,10 @@ app.whenReady().then(() => {
   prepareApp()
   // Set app user model id for windows
   electronApp.setAppUserModelId('com.electron')
+
+  ipcMain.handle('db:selectData', async (event, { tableName, selectObject }) => {
+    return selectData(tableName, selectObject)
+  })
 
   // Default open or close DevTools by F12 in development
   // and ignore CommandOrControl + R in production.

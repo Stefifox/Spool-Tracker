@@ -1,7 +1,6 @@
 import { resolve } from 'path'
 import { defineConfig } from 'electron-vite'
 import react from '@vitejs/plugin-react'
-import fs from 'fs'
 
 export default defineConfig({
   main: {},
@@ -13,9 +12,6 @@ export default defineConfig({
       }
     },
     plugins: [react()],
-    define: {
-      process: process,
-      __filename: __filename
-    }
+    define: {}
   }
 })

@@ -39,9 +39,10 @@ async function selectData(tableName, selectObject) {
 
     const query = `SELECT ${selectObject.columns.join(', ')} FROM ${tableName}`
 
-    console.log(query)
-
-    return resolve([])
+    db.all(query, [], (error, rows) => {
+      if (error) return reject(error)
+      return resolve(rows)
+    })
   })
 }
 
