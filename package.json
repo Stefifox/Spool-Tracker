@@ -1,42 +1,42 @@
 {
   "name": "spooltracker",
-  "productName": "spooltracker",
   "version": "1.0.0",
-  "description": "My Electron application description",
-  "main": ".webpack/main",
+  "description": "An Electron application with React",
+  "main": "./out/main/index.js",
+  "author": "example.com",
+  "homepage": "https://electron-vite.org",
   "scripts": {
-    "start": "electron-forge start",
-    "package": "electron-forge package",
-    "make": "electron-forge make"
-  },
-  "keywords": [],
-  "author": {
-    "name": "Stefano",
-    "email": "30950154+Stefifox@users.noreply.github.com"
-  },
-  "license": "MIT",
-  "devDependencies": {
-    "@babel/core": "^7.28.6",
-    "@babel/preset-react": "^7.28.5",
-    "@electron-forge/cli": "^7.10.2",
-    "@electron-forge/maker-deb": "^7.10.2",
-    "@electron-forge/maker-rpm": "^7.10.2",
-    "@electron-forge/maker-squirrel": "^7.10.2",
-    "@electron-forge/maker-zip": "^7.10.2",
-    "@electron-forge/plugin-auto-unpack-natives": "^7.10.2",
-    "@electron-forge/plugin-fuses": "^7.10.2",
-    "@electron-forge/plugin-webpack": "^7.10.2",
-    "@electron/fuses": "^1.8.0",
-    "@vercel/webpack-asset-relocator-loader": "^1.7.3",
-    "babel-loader": "^10.0.0",
-    "css-loader": "^6.11.0",
-    "electron": "39.2.7",
-    "node-loader": "^2.1.0",
-    "style-loader": "^3.3.4"
+    "format": "prettier --write .",
+    "lint": "eslint --cache .",
+    "start": "electron-vite preview",
+    "dev": "electron-vite dev",
+    "build": "electron-vite build",
+    "postinstall": "electron-builder install-app-deps",
+    "build:unpack": "npm run build && electron-builder --dir",
+    "build:win": "npm run build && electron-builder --win",
+    "build:mac": "npm run build && electron-builder --mac",
+    "build:linux": "npm run build && electron-builder --linux"
   },
   "dependencies": {
-    "electron-squirrel-startup": "^1.0.1",
-    "react": "^19.2.3",
-    "react-dom": "^19.2.3"
+    "@electron-toolkit/preload": "^3.0.2",
+    "@electron-toolkit/utils": "^4.0.0",
+    "path": "^0.12.7",
+    "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "@electron-toolkit/eslint-config": "^2.1.0",
+    "@electron-toolkit/eslint-config-prettier": "^3.0.0",
+    "@vitejs/plugin-react": "^5.1.1",
+    "electron": "^39.2.6",
+    "electron-builder": "^26.0.12",
+    "electron-vite": "^5.0.0",
+    "eslint": "^9.39.1",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-refresh": "^0.4.24",
+    "prettier": "^3.7.4",
+    "react": "^19.2.1",
+    "react-dom": "^19.2.1",
+    "vite": "^7.2.6"
   }
 }
