@@ -1,7 +1,7 @@
 import { app, shell, BrowserWindow, ipcMain } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
-import { prepareApp, selectData } from '../backend/database'
+import { prepareApp, execute, selectData } from '../backend/database'
 import icon from '../../resources/icon.png?asset'
 
 function createWindow() {
@@ -47,6 +47,10 @@ app.whenReady().then(() => {
 
   ipcMain.handle('db:selectData', async (event, { tableName, selectObject }) => {
     return selectData(tableName, selectObject)
+  })
+
+  ipcMain.handle('db:execute', async (event, query) => {
+    return execute(query)
   })
 
   // Default open or close DevTools by F12 in development

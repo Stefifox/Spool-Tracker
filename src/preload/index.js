@@ -4,7 +4,8 @@ import { electronAPI } from '@electron-toolkit/preload'
 // Custom APIs for renderer
 const api = {
   selectData: (tableName, selectObject) =>
-    ipcRenderer.invoke('db:selectData', { tableName, selectObject })
+    ipcRenderer.invoke('db:selectData', { tableName, selectObject }),
+  execute: (query) => ipcRenderer.invoke('db:execute', query)
 }
 
 // Use `contextBridge` APIs to expose Electron APIs to
