@@ -4,19 +4,28 @@ const db = new sql.Database('./data.db')
 
 let _isReady = false
 
+const tables = [
+  {
+    name: 'tab_spools',
+    query:
+      'CREATE TABLE IF NOT EXISTS tab_spools (spool_id INTEGER PRIMARY KEY AUTOINCREMENT, spool_title TEXT NOT NULL, spool_mat_id INTEGER NOT NULL, spool_color TEXT NULL, spool_size INTEGER NULL, spool_qty INTEGER NULL, spool_price DECIMAL NULL);'
+  },
+  {
+    name: 'tab_materials',
+    query:
+      'CREATE TABLE IF NOT EXISTS tab_materials (mat_id INTEGER PRIMARY KEY AUTOINCREMENT, mat_title TEXT NOT NULL, mat_std_price DECIMAL NULL);'
+  }
+]
+
 async function prepareApp() {
   return new Promise((resolve, reject) => {
     db.all("SELECT name FROM sqlite_master WHERE type='table';", [], (err, data) => {
       try {
         if (err) return reject(err)
         if (!data || data?.length === 0) {
-          const spoolTable =
-            'CREATE TABLE IF NOT EXISTS tab_spools (spool_id INTEGER PRIMARY KEY AUTOINCREMENT, spool_title TEXT NOT NULL, spool_mat_id INTEGER NOT NULL, spool_color TEXT NULL, spool_size INTEGER NULL, spool_qty INTEGER NULL, spool_price DECIMAL NULL);'
-          db.exec(spoolTable)
-
-          const materialTable =
-            'CREATE TABLE IF NOT EXISTS tab_materials (mat_id INTEGER PRIMARY KEY AUTOINCREMENT, mat_title TEXT NOT NULL, mat_std_price DECIMAL NULL);'
-          db.exec(materialTable)
+          tables.forEach(({ query }) => {
+            db.exec(query)
+          })
 
           _isReady = true
           return resolve()
