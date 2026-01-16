@@ -6,12 +6,12 @@ let _isReady = false
 
 async function prepareApp() {
   return new Promise((resolve, reject) => {
-    db.exec("SELECT name FROM sqlite_master WHERE type='table';", (data) => {
+    db.all("SELECT name FROM sqlite_master WHERE type='table';", [], (err, data) => {
       try {
+        if (err) return reject(err)
         if (!data || data?.length === 0) {
           const spoolTable =
             'CREATE TABLE IF NOT EXISTS tab_spools (spool_id INTEGER PRIMARY KEY AUTOINCREMENT, spool_title TEXT NOT NULL, spool_color TEXT NULL, spool_size INTEGER NULL, spool_qty INTEGER NULL);'
-
           db.exec(spoolTable)
 
           _isReady = true
