@@ -5,6 +5,12 @@ import { electronAPI } from '@electron-toolkit/preload'
 const api = {
   selectData: (tableName, selectObject) =>
     ipcRenderer.invoke('db:selectData', { tableName, selectObject }),
+  insertData: (tableName, insertObject) =>
+    ipcRenderer.invoke('db:insertData', { tableName, insertObject }),
+  updateData: (tableName, updateObject) =>
+    ipcRenderer.invoke('db:updateData', { tableName, updateObject }),
+  deleteData: (tableName, keyField, keyValue) =>
+    ipcRenderer.invoke('db:deleteData', { tableName, keyField, keyValue }),
   execute: (query) => ipcRenderer.invoke('db:execute', query)
 }
 

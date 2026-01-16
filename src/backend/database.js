@@ -4,6 +4,8 @@ const db = new sql.Database('./data.db')
 
 let _isReady = false
 
+// TODO: Improve error handling, table creation and values management
+
 const tables = [
   {
     name: 'tab_spools',
@@ -43,18 +45,103 @@ async function prepareApp() {
 /**
  * Select data from the database
  * @param tableName {string}
- * @param selectObject {{columns: string[], where?: {column: string, type: string, value: string}[]}}
+ * @param selectObject {{columns: string[], where?: {column: string, type: string, value: *}[]}}
  * @return {Promise<any | any[]>}
  */
 async function selectData(tableName, selectObject) {
   return new Promise((resolve, reject) => {
     if (!_isReady) return reject('Database is not ready')
 
-    let query = `SELECT ${selectObject.columns.join(', ')} FROM ${tableName}`
+    let query = `SELECT ${selectObject.columns.join(', ')} FROM ${tableName} `
 
     if (selectObject.where) {
       query += buildWhere(selectObject.where)
     }
+
+    execute(query)
+      .then((res) => {
+        return resolve(res)
+      })
+      .catch((err) => {
+        return reject(err)
+      })
+  })
+}
+
+/**
+ * Insert data into a table
+ * @param tableName {string}
+ * @param insertObject {*}
+ * @return {Promise<>}
+ */
+async function insertData(tableName, insertObject) {
+  return new Promise((resolve, reject) => {
+    if (!_isReady) return reject('Database is not ready')
+
+    const columns = Object.keys(insertObject)
+    const values = []
+
+    columns.forEach((col) => {
+      values.push(`'${insertObject[col]}'`)
+    })
+
+    const query = `INSERT INTO ${tableName}(${columns.join(', ')}) VALUES (${values.join(', ')})`
+
+    execute(query)
+      .then((res) => {
+        return resolve(res)
+      })
+      .catch((err) => {
+        return reject(err)
+      })
+  })
+}
+
+/**
+ * Update the content of a specified table
+ * @param tableName {string}
+ * @param updateObject {{values: *, where?: {column: string, type: string, value: *}[]}}
+ * @return {Promise<>}
+ */
+async function updateData(tableName, updateObject) {
+  return new Promise((resolve, reject) => {
+    if (!_isReady) return reject('Database is not ready')
+
+    const updVal = updateObject.values
+
+    const columns = Object.keys(updVal)
+
+    const updList = []
+    columns.forEach((col) => {
+      updList.push(`${col} = '${updVal[col]}'`)
+    })
+
+    const query =
+      `UPDATE ${tableName} SET ${updList.join(', ')} ` +
+      (updateObject.where ? buildWhere(updateObject.where) : '')
+
+    execute(query)
+      .then((res) => {
+        return resolve(res)
+      })
+      .catch((err) => {
+        return reject(err)
+      })
+  })
+}
+
+/**
+ * Deletes a value from the specified table
+ * @param tableName {string}
+ * @param keyField {string}
+ * @param keyValue {*}
+ * @return {Promise<>}
+ */
+async function deleteData(tableName, keyField, keyValue) {
+  return new Promise((resolve, reject) => {
+    if (!_isReady) return reject('Database is not ready')
+
+    const query = `DELETE FROM ${tableName} WHERE ${keyField} = '${keyValue}'`
 
     execute(query)
       .then((res) => {
@@ -77,18 +164,6 @@ async function execute(query) {
       if (error) return reject(error)
       return resolve(rows)
     })
-  })
-}
-
-async function insertData(tableName, insertObject) {
-  return new Promise((resolve, reject) => {
-    if (!_isReady) return reject('Database is not ready')
-  })
-}
-
-async function updateData(tableName, updateObject) {
-  return new Promise((resolve, reject) => {
-    if (!_isReady) return reject('Database is not ready')
   })
 }
 
@@ -129,4 +204,4 @@ function buildWhere(whereObject) {
   return whereClause
 }
 
-export { prepareApp, execute, selectData }
+export { prepareApp, execute, selectData, insertData, updateData, deleteData }

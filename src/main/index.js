@@ -1,7 +1,14 @@
 import { app, shell, BrowserWindow, ipcMain } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
-import { prepareApp, execute, selectData } from '../backend/database'
+import {
+  prepareApp,
+  execute,
+  selectData,
+  insertData,
+  updateData,
+  deleteData
+} from '../backend/database'
 import icon from '../../resources/icon.png?asset'
 
 function createWindow() {
@@ -48,7 +55,15 @@ app.whenReady().then(() => {
   ipcMain.handle('db:selectData', async (event, { tableName, selectObject }) => {
     return selectData(tableName, selectObject)
   })
-
+  ipcMain.handle('db:insertData', async (event, { tableName, insertObject }) => {
+    return insertData(tableName, insertObject)
+  })
+  ipcMain.handle('db:updateData', async (event, { tableName, updateObject }) => {
+    return updateData(tableName, updateObject)
+  })
+  ipcMain.handle('db:deleteData', async (event, { tableName, keyField, keyValue }) => {
+    return deleteData(tableName, keyField, keyValue)
+  })
   ipcMain.handle('db:execute', async (event, query) => {
     return execute(query)
   })
