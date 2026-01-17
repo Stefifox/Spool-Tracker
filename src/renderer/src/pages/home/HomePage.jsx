@@ -1,24 +1,9 @@
-import { Button, Typography } from '@mui/material'
-import { useDispatch } from 'react-redux'
+import { Typography } from '@mui/material'
 
-import {showSuccess} from '../../slices/messageSlice'
-
-export default function HomePage(props) {
-  const dispatch = useDispatch()
-
+export default function HomePage() {
   return (
     <>
-      <Typography variant="title">Benvenuto</Typography>
-
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={() => {
-          dispatch(showSuccess('Prova'))
-        }}
-      >
-        Clicca qui
-      </Button>
+      <Typography variant="body1">Benvenuto</Typography>
     </>
   )
 }

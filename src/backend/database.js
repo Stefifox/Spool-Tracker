@@ -16,6 +16,11 @@ const tables = [
     name: 'tab_materials',
     query:
       'CREATE TABLE IF NOT EXISTS tab_materials (mat_id INTEGER PRIMARY KEY AUTOINCREMENT, mat_title TEXT NOT NULL, mat_std_price DECIMAL NULL);'
+  },
+  {
+    name: 'tab_settings',
+    query:
+      'CREATE TABLE IF NOT EXISTS tab_settings (sett_id INTEGER PRIMARY KEY AUTOINCREMENT, sett_key TEXT NOT NULL, sett_value TEXT NOT NULL);'
   }
 ]
 
