@@ -11,7 +11,8 @@ const api = {
     ipcRenderer.invoke('db:updateData', { tableName, updateObject }),
   deleteData: (tableName, keyField, keyValue) =>
     ipcRenderer.invoke('db:deleteData', { tableName, keyField, keyValue }),
-  execute: (query) => ipcRenderer.invoke('db:execute', query)
+  execute: (query) => ipcRenderer.invoke('db:execute', query),
+  setTitle: (title) => ipcRenderer.invoke('app:setTitle', title)
 }
 
 // Use `contextBridge` APIs to expose Electron APIs to

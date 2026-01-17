@@ -35,6 +35,10 @@ function createWindow() {
     return { action: 'deny' }
   })
 
+  ipcMain.handle('app:setTitle', (event, title) => {
+    return mainWindow.setTitle(title)
+  })
+
   // HMR for renderer base on electron-vite cli.
   // Load the remote URL for development or the local html file for production.
   if (is.dev && process.env['ELECTRON_RENDERER_URL']) {

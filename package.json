@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Track your 3D Printer spools",
   "main": "./out/main/index.js",
-  "author": "Stefifox Apps",
+  "author": "StefifoxApps",
   "homepage": "https://electron-vite.org",
   "scripts": {
     "format": "prettier --write .",
@@ -33,6 +33,7 @@
   "devDependencies": {
     "@electron-toolkit/eslint-config": "^2.1.0",
     "@electron-toolkit/eslint-config-prettier": "^3.0.0",
+    "@iconify/react": "^6.0.2",
     "@vitejs/plugin-react": "^5.1.1",
     "electron": "^39.2.6",
     "electron-builder": "^26.0.12",

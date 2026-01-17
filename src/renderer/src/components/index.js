@@ -1,4 +1,6 @@
 import DialogsProvider from './DialogsProvider'
 import MessageProvider from './MessageProvider'
 
-export { DialogsProvider, MessageProvider }
+import BasePage from './BasePage'
+
+export { DialogsProvider, MessageProvider, BasePage }

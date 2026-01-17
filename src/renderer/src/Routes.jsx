@@ -1,10 +1,18 @@
-import { Navigate, Route, Routes } from 'react-router'
+import { Route, Routes } from 'react-router'
 import { HomePage } from './pages'
+import { BasePage } from './components'
 
 function AppRoutes(props) {
   return (
     <Routes>
-      <Route path="/" element={<HomePage props/>} />
+      <Route
+        path="/"
+        element={
+          <BasePage title={'Test'}>
+            <HomePage />
+          </BasePage>
+        }
+      />
     </Routes>
   )
 }
