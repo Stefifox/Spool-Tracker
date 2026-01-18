@@ -1,8 +1,22 @@
+:root {
+  --menuHeight: 64px;
+}
+
+.appbar {
+  height: var(--menuHeight);
+  position: sticky;
+  top: 0;
+  z-index: 99;
+}
+
 .navigation {
-  margin: 0.4rem;
-  padding: 0.2rem;
+  margin: 8px;
+  padding: 8px;
+  position: fixed;
+  top: var(--menuHeight);
+  height: calc(100vh - var(--menuHeight) - 32px);
 }
 
 .page {
-  margin: 0.4rem;
+  margin: 8px;
 }

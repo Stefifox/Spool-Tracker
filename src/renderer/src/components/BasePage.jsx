@@ -18,7 +18,7 @@ import { Icon } from '@iconify/react'
 
 /**
  * Provides a container for the various app pages
- * @param props {{title: string}}
+ * @param props {{title: string, children: *}}
  * @constructor
  */
 export default function BasePage(props) {
@@ -34,7 +34,7 @@ export default function BasePage(props) {
 
   return (
     <>
-      <Box style={{ position: 'sticky', top: 0, zIndex: 99 }}>
+      <Box className={'appbar'}>
         <AppBar position="static">
           <Toolbar>
             <IconButton
