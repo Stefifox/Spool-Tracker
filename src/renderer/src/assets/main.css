@@ -20,3 +20,8 @@
 .page {
   margin: 8px;
 }
+
+.listItem {
+  width: 100%;
+  padding: 4px;
+}

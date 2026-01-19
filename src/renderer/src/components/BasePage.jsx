@@ -79,6 +79,11 @@ function Navigation() {
       text: 'HomePage'
     },
     {
+      path: '/spools',
+      icon: 'cbi:3d-filament',
+      text: 'Spools'
+    },
+    {
       path: '/settings',
       icon: 'mdi:settings',
       text: 'Settings'
