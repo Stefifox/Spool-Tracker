@@ -2,6 +2,14 @@
   --menuHeight: 64px;
 }
 
+.error404{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - var(--menuHeight) - 32px);
+}
+
 .appbar {
   height: var(--menuHeight);
   position: sticky;

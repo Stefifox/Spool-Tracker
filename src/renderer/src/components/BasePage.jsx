@@ -45,7 +45,7 @@ export default function BasePage(props) {
               sx={{ mr: 2 }}
               onClick={handleMenu}
             >
-              <Icon icon="ic:baseline-16mp" width="36" height="36" />
+              <Icon icon="mdi:menu" width="36" height="36" />
             </IconButton>
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               {props.title}

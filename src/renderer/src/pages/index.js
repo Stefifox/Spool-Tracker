@@ -1,4 +1,6 @@
 import HomePage from './home/HomePage'
 import SpoolsPage from './spools/SpoolPage'
 
-export { HomePage, SpoolsPage }
+import Error404 from './Error404'
+
+export { HomePage, SpoolsPage, Error404 }

@@ -1,5 +1,5 @@
-import { Route, Routes } from 'react-router'
-import { HomePage, SpoolsPage } from './pages'
+import { Navigate, Route, Routes } from 'react-router'
+import { HomePage, SpoolsPage, Error404 } from './pages'
 import { BasePage } from './components'
 
 function AppRoutes() {
@@ -21,6 +21,16 @@ function AppRoutes() {
           </BasePage>
         }
       />
+      {/** Errors **/}
+      <Route
+        path="/404"
+        element={
+          <BasePage title={'404'}>
+            <Error404 />
+          </BasePage>
+        }
+      />
+      <Route path="*" element={<Navigate to={'/404'} />} />
     </Routes>
   )
 }
