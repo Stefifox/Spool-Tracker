@@ -2,7 +2,7 @@ import React from 'react'
 import { HashRouter } from 'react-router'
 import { Provider } from 'react-redux'
 
-import Routes from './Routes'
+import Routes from './AppRoutes'
 import { MessageProvider, DialogsProvider } from './components'
 import store from './store'
 

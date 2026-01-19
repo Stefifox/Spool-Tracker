@@ -1,15 +1,23 @@
 import { Route, Routes } from 'react-router'
-import { HomePage } from './pages'
+import { HomePage, SpoolsPage } from './pages'
 import { BasePage } from './components'
 
-function AppRoutes(props) {
+function AppRoutes() {
   return (
     <Routes>
       <Route
         path="/"
         element={
-          <BasePage title={'Test'}>
+          <BasePage title={'Home'}>
             <HomePage />
+          </BasePage>
+        }
+      />
+      <Route
+        path="/spools"
+        element={
+          <BasePage title={'Spools'}>
+            <SpoolsPage />
           </BasePage>
         }
       />
