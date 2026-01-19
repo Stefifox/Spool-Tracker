@@ -21,6 +21,11 @@ const tables = [
     name: 'tab_settings',
     query:
       'CREATE TABLE IF NOT EXISTS tab_settings (sett_id INTEGER PRIMARY KEY AUTOINCREMENT, sett_key TEXT NOT NULL, sett_value TEXT NOT NULL);'
+  },
+  {
+    name: 'v_spools',
+    query:
+      'CREATE VIEW v_spools AS SELECT * FROM tab_spools LEFT JOIN tab_materials ON tab_spools.spool_mat_id = tab_materials.mat_id'
   }
 ]
 
