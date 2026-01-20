@@ -3,18 +3,20 @@ import { HashRouter } from 'react-router'
 import { Provider } from 'react-redux'
 
 import Routes from './AppRoutes'
-import { MessageProvider, DialogsProvider } from './components'
+import { MessageProvider, DialogsProvider, StartupProvider } from './components'
 import store from './store'
 
 function App() {
   return (
     <Provider store={store}>
       <HashRouter>
-        <MessageProvider>
-          <DialogsProvider>
-            <Routes />
-          </DialogsProvider>
-        </MessageProvider>
+        <StartupProvider>
+          <MessageProvider>
+            <DialogsProvider>
+              <Routes />
+            </DialogsProvider>
+          </MessageProvider>
+        </StartupProvider>
       </HashRouter>
     </Provider>
   )
