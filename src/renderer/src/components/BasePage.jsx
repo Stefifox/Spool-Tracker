@@ -15,6 +15,7 @@ import {
   ListItemText
 } from '@mui/material'
 import { Icon } from '@iconify/react'
+import { useTranslation } from 'react-i18next'
 
 /**
  * Provides a container for the various app pages
@@ -22,8 +23,6 @@ import { Icon } from '@iconify/react'
  * @constructor
  */
 export default function BasePage(props) {
-  const navigate = useNavigate()
-
   const [open, setOpen] = React.useState(true)
 
   const handleMenu = () => {
@@ -71,22 +70,23 @@ export default function BasePage(props) {
 
 function Navigation() {
   const navigate = useNavigate()
+  const { t } = useTranslation()
 
   const routes = [
     {
       path: '/',
       icon: 'mdi:home',
-      text: 'HomePage'
+      text: 'NAVBAR_HOME'
     },
     {
       path: '/spools',
       icon: 'cbi:3d-filament',
-      text: 'Spools'
+      text: 'NAVBAR_SPOOLS'
     },
     {
       path: '/settings',
       icon: 'mdi:settings',
-      text: 'Settings'
+      text: 'NAVBAR_SETTINGS'
     }
   ]
 
@@ -103,7 +103,7 @@ function Navigation() {
               <ListItemIcon>
                 <Icon icon={v.icon} width="36" height="36" />
               </ListItemIcon>
-              <ListItemText primary={v.text} />
+              <ListItemText primary={t(v.text)} />
             </ListItemButton>
           </ListItem>
         ))}
