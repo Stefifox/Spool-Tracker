@@ -1,10 +1,12 @@
 import { Navigate, Route, Routes } from 'react-router'
-import { HomePage, SpoolsPage, Error404 } from './pages'
+
+import { HomePage, SpoolsPage, Error404, WelcomePage } from './pages'
 import { BasePage } from './components'
 
 function AppRoutes() {
   return (
     <Routes>
+      <Route path="/welcome" element={<WelcomePage />} />
       <Route
         path="/"
         element={
