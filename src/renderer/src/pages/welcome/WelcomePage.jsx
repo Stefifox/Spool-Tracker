@@ -6,6 +6,7 @@ import { Button, Grid, MenuItem, Select, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { useDatabase, useSettings } from '../../hooks'
 import { setInitialized, setSettings } from '../../slices/appSlice'
+import { showError } from '../../slices/messageSlice'
 
 export default function WelcomePage() {
   const dispatch = useDispatch()
@@ -45,7 +46,20 @@ export default function WelcomePage() {
   const confirmSettings = () => {
     dispatch(setSettings(userSettings))
     dispatch(setInitialized(true))
-    navigate('/')
+
+    const insertValues = []
+    Object.keys(userSettings).forEach((key) => {
+      insertValues.push({ sett_key: key, sett_value: userSettings[key] })
+    })
+    insertValues.push({ sett_key: 'initState', sett_value: 1 })
+    console.log(insertValues)
+    db.addData(insertValues)
+      .then(() => {
+        navigate('/')
+      })
+      .catch((err) => {
+        dispatch(showError(err))
+      })
   }
 
   if (appSettings.isInitialized) {

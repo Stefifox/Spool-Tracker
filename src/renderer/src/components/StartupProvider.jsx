@@ -12,16 +12,11 @@ export default function StartupProvider({ children }) {
   const { i18n } = useTranslation()
 
   const [isLoading, setLoading] = React.useState(true)
-  const [initialized, setInit] = React.useState(false)
 
   const loadData = (data) => {
     const obj = {}
     data.forEach((val) => {
-      if (val.settKey === 'initState') {
-        setInit(val.sett_value === '1')
-      } else {
         obj[val.sett_key] = val.sett_value
-      }
     })
     return obj
   }
@@ -31,9 +26,9 @@ export default function StartupProvider({ children }) {
       .then((data) => {
         const appData = loadData(data)
         dispatch(setSettings(appData))
-        dispatch(setInitialized(initialized))
+        dispatch(setInitialized(appData.initState === "1"))
         i18n.changeLanguage(appData.language)
-        console.log("App Settings: ", appData)
+        console.log('App Settings: ', appData)
         setLoading(false)
       })
       .catch(() => {
