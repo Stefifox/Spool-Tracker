@@ -1,4 +1,5 @@
 import * as sql from 'sqlite3'
+import * as sqlite from 'node:sqlite'
 
 const db = new sql.Database('./data.db')
 
@@ -81,21 +82,37 @@ async function selectData(tableName, selectObject) {
 /**
  * Insert data into a table
  * @param tableName {string}
- * @param insertObject {*}
+ * @param insertObject {* | *[]}
  * @return {Promise<>}
  */
 async function insertData(tableName, insertObject) {
   return new Promise((resolve, reject) => {
     if (!_isReady) return reject('Database is not ready')
 
-    const columns = Object.keys(insertObject)
-    const values = []
+    const isArray = Array.isArray(insertObject)
 
-    columns.forEach((col) => {
-      values.push(`'${insertObject[col]}'`)
-    })
+    const columns = []
+    const valuesList = []
 
-    const query = `INSERT INTO ${tableName}(${columns.join(', ')}) VALUES (${values.join(', ')})`
+    if (isArray) {
+      columns.push(...extractKeys(insertObject))
+    } else {
+      columns.push(...Object.keys(insertObject))
+    }
+
+    const keys = columns.filter((element) => columns.includes(element))
+    const keyString = keys.join(',')
+
+    if (isArray) {
+      insertObject.forEach((item) => {
+        valuesList.push(`(${extractValues(keys, item)})`)
+      })
+    } else {
+      valuesList.push(`(${extractValues(keys, insertObject)})`)
+    }
+
+    const query = `INSERT INTO ${tableName}(${keyString})
+                                VALUES ${valuesList.join(',')}`
 
     execute(query)
       .then((res) => {
@@ -212,6 +229,33 @@ function buildWhere(whereObject) {
   })
 
   return whereClause
+}
+
+function extractKeys(obj) {
+  const tmpObj = []
+
+  obj.forEach((item) => {
+    const keys = Object.keys(item)
+    tmpObj.push(...keys)
+  })
+
+  return tmpObj.filter(function (item, pos) {
+    return tmpObj.indexOf(item) === pos
+  })
+}
+
+function extractValues(keys, obj) {
+  const currentValues = []
+  keys.forEach((modelKey) => {
+    currentValues.push(getValue(modelKey, obj))
+  })
+  return currentValues
+}
+
+function getValue(key, obj) {
+  const value = obj[key]?.toString()
+  if (!value) return 'null'
+  return `'${value}'`
 }
 
 export { prepareApp, execute, selectData, insertData, updateData, deleteData }

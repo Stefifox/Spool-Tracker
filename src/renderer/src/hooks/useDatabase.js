@@ -12,7 +12,7 @@ export default function useDatabase(table) {
   }
 
   /**
-   * @param insertObject
+   * @param insertObject {* | *[]}
    * @return {Promise<*>}
    */
   const addData = (insertObject) => {
