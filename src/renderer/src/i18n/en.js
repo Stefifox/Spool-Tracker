@@ -3,6 +3,9 @@ const en = {
   NAVBAR_SPOOLS: 'Spools',
   NAVBAR_SETTINGS: 'Settings',
 
+  HOME_TITLE: 'Home Page',
+  SPOOL_TITLE: 'Spools',
+
   STARTUP_TITLE: 'Welcome',
   STARTUP_DESCRIPTION: 'Take a moment to configure this app correctly',
   STARTUP_SETTINGS_DESCRIPTION: 'Change this settings as you please',

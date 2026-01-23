@@ -2,15 +2,19 @@ import { Navigate, Route, Routes } from 'react-router'
 
 import { HomePage, SpoolsPage, Error404, WelcomePage } from './pages'
 import { BasePage } from './components'
+import { useTranslation } from 'react-i18next'
 
 function AppRoutes() {
+
+  const {t} = useTranslation()
+
   return (
     <Routes>
       <Route path="/welcome" element={<WelcomePage />} />
       <Route
         path="/"
         element={
-          <BasePage title={'Home'}>
+          <BasePage title={t('HOME_TITLE')}>
             <HomePage />
           </BasePage>
         }
@@ -18,7 +22,7 @@ function AppRoutes() {
       <Route
         path="/spools"
         element={
-          <BasePage title={'Spools'}>
+          <BasePage title={t('SPOOL_TITLE')}>
             <SpoolsPage />
           </BasePage>
         }
