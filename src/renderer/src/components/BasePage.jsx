@@ -84,6 +84,11 @@ function Navigation() {
       text: 'NAVBAR_SPOOLS'
     },
     {
+      path: '/materials',
+      icon: 'mdi:material',
+      text: 'NAVBAR_MATERIALS'
+    },
+    {
       path: '/settings',
       icon: 'mdi:settings',
       text: 'NAVBAR_SETTINGS'

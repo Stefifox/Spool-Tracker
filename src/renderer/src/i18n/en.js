@@ -1,10 +1,12 @@
 const en = {
   NAVBAR_HOME: 'Home Page',
   NAVBAR_SPOOLS: 'Spools',
+  NAVBAR_MATERIALS: 'Materials',
   NAVBAR_SETTINGS: 'Settings',
 
   HOME_TITLE: 'Home Page',
   SPOOL_TITLE: 'Spools',
+  MATERIALS_TITLE: 'Materials',
 
   STARTUP_TITLE: 'Welcome',
   STARTUP_DESCRIPTION: 'Take a moment to configure this app correctly',
@@ -13,9 +15,18 @@ const en = {
   STARTUP_ALL_SET_DESCRIPTION: "That's it, the App is ready!",
   STARTUP_START: "Let's start!",
 
+  SPOOL_PAGE_TITLE: 'Your Spools',
+  SPOOL_PAGE_DESC: 'Manage the list of spools',
+
+  MATERIALS_PAGE_TITLE: 'Your Materials',
+  MATERIALS_PAGE_DESC: 'Manage the materials available in the app',
+
   SETTINGS_APP_THEME: 'App Theme',
   SETTINGS_DARK_THEME: 'Dark',
   SETTINGS_CURRENCY: 'Currency',
+
+  TOOLTIP_DELETE: 'Delete',
+  TOOLTIP_EDIT: 'Edit',
 
   BUTTON_NEXT: 'Next',
   BUTTON_PREVIOUS: 'Previous'

@@ -1,6 +1,6 @@
 import { Navigate, Route, Routes } from 'react-router'
 
-import { HomePage, SpoolsPage, Error404, WelcomePage } from './pages'
+import { HomePage, SpoolsPage, Error404, WelcomePage, MaterialsPage } from './pages'
 import { BasePage } from './components'
 import { useTranslation } from 'react-i18next'
 
@@ -24,6 +24,14 @@ function AppRoutes() {
         element={
           <BasePage title={t('SPOOL_TITLE')}>
             <SpoolsPage />
+          </BasePage>
+        }
+      />
+      <Route
+        path="/materials"
+        element={
+          <BasePage title={t('MATERIALS_TITLE')}>
+            <MaterialsPage />
           </BasePage>
         }
       />

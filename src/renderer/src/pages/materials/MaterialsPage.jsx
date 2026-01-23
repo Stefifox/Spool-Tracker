@@ -2,25 +2,34 @@ import React from 'react'
 
 import useDatabase from '../../hooks/useDatabase'
 import { useDispatch } from 'react-redux'
-import { showError } from '../../slices/messageSlice'
+import { showError, showSuccess } from '../../slices/messageSlice'
 import { CircularProgress, List, Typography } from '@mui/material'
-import SpoolItem from './SpoolItem'
 import { useTranslation } from 'react-i18next'
+import MaterialItem from './MaterialItem'
 
-export default function SpoolPage() {
-  const spoolTable = useDatabase('v_spools')
+export default function MaterialsPage() {
+  const db = useDatabase('tab_materials')
   const { t } = useTranslation()
   const dispatch = useDispatch()
 
-  const [spoolList, setSpoolList] = React.useState([])
+  const [matList, setMatList] = React.useState([])
   const [isLoading, setLoading] = React.useState(false)
+
+  const deleteItem = itmId => {
+    db.delData("mat_id", itmId)
+      .then(() => {
+        dispatch(showSuccess("Deleted"))
+      })
+      .catch((err) => {
+        dispatch(showError(err))
+      })
+  }
 
   React.useEffect(() => {
     setLoading(true)
-    spoolTable
-      .getData({ columns: ['*'] })
+    db.getData({ columns: ['*'] })
       .then((data) => {
-        setSpoolList(data)
+        setMatList(data)
         setLoading(false)
       })
       .catch((error) => {
@@ -31,8 +40,8 @@ export default function SpoolPage() {
 
   return (
     <>
-      <Typography variant="h6">{t('SPOOL_PAGE_TITLE')}</Typography>
-      <Typography variant="subtitle1">{t('SPOOL_PAGE_DESC')}</Typography>
+      <Typography variant="h6">{t('MATERIALS_PAGE_TITLE')}</Typography>
+      <Typography variant="subtitle1">{t('MATERIALS_PAGE_DESC')}</Typography>
       {isLoading && (
         <div
           style={{
@@ -49,8 +58,8 @@ export default function SpoolPage() {
       {!isLoading && (
         <div>
           <List>
-            {spoolList.map((v, k) => (
-              <SpoolItem key={k} model={v} />
+            {matList.map((v, k) => (
+              <MaterialItem key={k} model={v} deleteAction={deleteItem} />
             ))}
           </List>
         </div>
