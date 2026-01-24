@@ -1,40 +1,26 @@
+import React from 'react'
 import { Navigate, Route, Routes } from 'react-router'
 
-import { HomePage, SpoolsPage, Error404, WelcomePage, MaterialsPage } from './pages'
+import {Error404, WelcomePage, MaterialsPage } from './pages'
+import routes from './routes'
 import { BasePage } from './components'
 import { useTranslation } from 'react-i18next'
 
 function AppRoutes() {
-
-  const {t} = useTranslation()
+  const { t } = useTranslation()
 
   return (
     <Routes>
       <Route path="/welcome" element={<WelcomePage />} />
-      <Route
-        path="/"
-        element={
-          <BasePage title={t('HOME_TITLE')}>
-            <HomePage />
-          </BasePage>
-        }
-      />
-      <Route
-        path="/spools"
-        element={
-          <BasePage title={t('SPOOL_TITLE')}>
-            <SpoolsPage />
-          </BasePage>
-        }
-      />
-      <Route
-        path="/materials"
-        element={
-          <BasePage title={t('MATERIALS_TITLE')}>
-            <MaterialsPage />
-          </BasePage>
-        }
-      />
+      {routes.map((route, index) => (
+        <Route
+          key={index}
+          path={route.path}
+          element={
+            <BasePage title={t(route.pageName)} page={route.Element} />
+          }
+        />
+      ))}
       {/** Errors **/}
       <Route
         path="/404"

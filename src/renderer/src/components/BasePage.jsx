@@ -17,9 +17,11 @@ import {
 import { Icon } from '@iconify/react'
 import { useTranslation } from 'react-i18next'
 
+import routes from '../routes'
+
 /**
  * Provides a container for the various app pages
- * @param props {{title: string, children: *}}
+ * @param props {{title: string, page: *, children: *}}
  * @constructor
  */
 export default function BasePage(props) {
@@ -59,7 +61,9 @@ export default function BasePage(props) {
           </Grid>
         )}
         <Grid size={open ? 10 : 12}>
-          <div className={'page'}>{React.cloneElement(props.children, {})}</div>
+          <div className={'page'}>
+            {props.children ? React.cloneElement(props.children, {}) : <props.page />}
+          </div>
         </Grid>
       </Grid>
     </>
@@ -72,33 +76,12 @@ function Navigation() {
   const navigate = useNavigate()
   const { t } = useTranslation()
 
-  const routes = [
-    {
-      path: '/',
-      icon: 'mdi:home',
-      text: 'NAVBAR_HOME'
-    },
-    {
-      path: '/spools',
-      icon: 'cbi:3d-filament',
-      text: 'NAVBAR_SPOOLS'
-    },
-    {
-      path: '/materials',
-      icon: 'mdi:material',
-      text: 'NAVBAR_MATERIALS'
-    },
-    {
-      path: '/settings',
-      icon: 'mdi:settings',
-      text: 'NAVBAR_SETTINGS'
-    }
-  ]
+  const r = routes.filter((f) => f.show)
 
   return (
     <Paper className={'navigation'} elevation={2}>
       <List>
-        {routes.map((v, k) => (
+        {r.map((v, k) => (
           <ListItem key={k} disablePadding>
             <ListItemButton
               onClick={() => {
@@ -108,7 +91,7 @@ function Navigation() {
               <ListItemIcon>
                 <Icon icon={v.icon} width="36" height="36" />
               </ListItemIcon>
-              <ListItemText primary={t(v.text)} />
+              <ListItemText primary={t(v.navName)} />
             </ListItemButton>
           </ListItem>
         ))}
