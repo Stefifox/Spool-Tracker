@@ -28,8 +28,14 @@ const en = {
   TOOLTIP_DELETE: 'Delete',
   TOOLTIP_EDIT: 'Edit',
 
+  DIALOG_DELETE: 'Delete',
+  DIALOG_DELETE_TEXT: 'Are you sure you want to delete the selected item?',
+  DELETE_SUCCESS: 'Deleted',
+
   BUTTON_NEXT: 'Next',
-  BUTTON_PREVIOUS: 'Previous'
+  BUTTON_PREVIOUS: 'Previous',
+  BUTTON_CANCEL: 'Cancel',
+  BUTTON_CONFIRM: 'OK'
 }
 
 export default en

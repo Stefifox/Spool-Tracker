@@ -6,6 +6,7 @@ import { showError, showSuccess } from '../../slices/messageSlice'
 import { CircularProgress, List, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import MaterialItem from './MaterialItem'
+import { closeDialog } from '../../slices/dialogsSlice'
 
 export default function MaterialsPage() {
   const db = useDatabase('tab_materials')
@@ -14,14 +15,22 @@ export default function MaterialsPage() {
 
   const [matList, setMatList] = React.useState([])
   const [isLoading, setLoading] = React.useState(false)
+  const [reload, setReload] = React.useState(false)
 
-  const deleteItem = itmId => {
-    db.delData("mat_id", itmId)
+  const reloadList = () => {
+    setReload((r) => !r)
+  }
+
+  const deleteItem = (itmId) => {
+    db.delData('mat_id', itmId)
       .then(() => {
-        dispatch(showSuccess("Deleted"))
+        dispatch(showSuccess(t('DELETE_SUCCESS')))
+        dispatch(closeDialog())
+        reloadList()
       })
       .catch((err) => {
         dispatch(showError(err))
+        reloadList()
       })
   }
 
@@ -36,7 +45,7 @@ export default function MaterialsPage() {
         dispatch(showError(error))
         setLoading(false)
       })
-  }, [])
+  }, [reload])
 
   return (
     <>

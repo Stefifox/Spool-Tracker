@@ -12,7 +12,7 @@ export const dialogsSlice = createSlice({
       state.data = { open: true, ...action.payload }
     },
     closeDialog: (state, _action) => {
-      state.data = { showMessage: false }
+      state.data = { open: false }
     }
   }
 })

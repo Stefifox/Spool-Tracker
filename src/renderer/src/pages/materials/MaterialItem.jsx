@@ -1,13 +1,8 @@
 import { useTranslation } from 'react-i18next'
-import {
-  Grid,
-  IconButton,
-  ListItem,
-  Paper,
-  Tooltip,
-  Typography
-} from '@mui/material'
+import { Grid, IconButton, ListItem, Paper, Tooltip, Typography } from '@mui/material'
 import { Icon } from '@iconify/react'
+import showDeleteDialog from '../../components/dialogs/DeleteItemDialog'
+import { useDispatch } from 'react-redux'
 
 /**
  *
@@ -17,6 +12,7 @@ import { Icon } from '@iconify/react'
  */
 export default function MaterialItem(props) {
   const { t } = useTranslation()
+  const dispatch = useDispatch()
 
   return (
     <ListItem
@@ -33,7 +29,12 @@ export default function MaterialItem(props) {
           </IconButton>
           <IconButton
             onClick={() => {
-              props.deleteAction(props.model.mat_id)
+              showDeleteDialog({
+                dispatch,
+                confirmAction: () => {
+                  props.deleteAction(props.model.mat_id)
+                }
+              })
             }}
           >
             <Tooltip title={t('TOOLTIP_DELETE')}>
@@ -45,7 +46,7 @@ export default function MaterialItem(props) {
     >
       <Paper elevation={2} className={'listItem'}>
         <Grid container spacing={1}>
-          <Grid item size={12}>
+          <Grid size={12}>
             <Typography>{props.model.mat_title}</Typography>
           </Grid>
         </Grid>

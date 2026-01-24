@@ -21,7 +21,7 @@ export default function MessageProvider({ children }) {
     <>
       <Snackbar
         open={messageData.showMessage}
-        autoHideDuration={6000}
+        autoHideDuration={3000}
         onClose={handleClose}
         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
       >
