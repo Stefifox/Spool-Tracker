@@ -1,5 +1,6 @@
 :root {
   --menuHeight: 64px;
+  --menuWidth: 200px;
 }
 
 .error404{
@@ -17,6 +18,16 @@
   z-index: 99;
 }
 
+.pageContainer {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+}
+
+.navigationContainer {
+  width: var(--menuWidth);
+}
+
 .navigation {
   margin: 8px;
   padding: 8px;
@@ -27,6 +38,7 @@
 
 .page {
   margin: 8px;
+  flex: 2;
 }
 
 .listItem {

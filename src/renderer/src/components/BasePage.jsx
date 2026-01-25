@@ -54,18 +54,16 @@ export default function BasePage(props) {
           </Toolbar>
         </AppBar>
       </Box>
-      <Grid container>
+      <div className='pageContainer'>
         {open && (
-          <Grid size={2}>
+          <div className='navigationContainer'>
             <Navigation />
-          </Grid>
-        )}
-        <Grid size={open ? 10 : 12}>
-          <div className={'page'}>
-            {props.children ? React.cloneElement(props.children, {}) : <props.page />}
           </div>
-        </Grid>
-      </Grid>
+        )}
+        <div className={'page'}>
+          {props.children ? React.cloneElement(props.children, {}) : <props.page />}
+        </div>
+      </div>
     </>
   )
 
