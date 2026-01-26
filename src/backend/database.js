@@ -1,7 +1,7 @@
 import * as sql from 'sqlite3'
-import * as sqlite from 'node:sqlite'
+import {app} from 'electron'
 
-const db = new sql.Database('./data.db')
+const db = new sql.Database(app.getPath('home') + '/SpollTrackerData.db')
 
 let _isReady = false
 
