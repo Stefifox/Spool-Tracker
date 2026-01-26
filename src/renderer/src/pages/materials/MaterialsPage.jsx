@@ -7,6 +7,8 @@ import { CircularProgress, Fab, List, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import MaterialItem from './MaterialItem'
 import { closeDialog } from '../../slices/dialogsSlice'
+import { Icon } from '@iconify/react'
+import showAddItemDialog from '../../components/dialogs/AddItemDialog'
 
 export default function MaterialsPage() {
   const db = useDatabase('tab_materials')
@@ -19,6 +21,10 @@ export default function MaterialsPage() {
 
   const reloadList = () => {
     setReload((r) => !r)
+  }
+
+  const addMaterial = () => {
+    showAddItemDialog({ dispatch, database: db, reload: setReload, type: 'materials' })
   }
 
   const deleteItem = (itmId) => {
@@ -49,6 +55,9 @@ export default function MaterialsPage() {
 
   return (
     <>
+      <Fab className="fab" color="secondary" onClick={addMaterial}>
+        <Icon icon="mdi:plus" width="36px" height="36px" />
+      </Fab>
       <Typography variant="h6">{t('MATERIALS_PAGE_TITLE')}</Typography>
       <Typography variant="subtitle1">{t('MATERIALS_PAGE_DESC')}</Typography>
       {isLoading && (

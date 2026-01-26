@@ -26,6 +26,8 @@ const en = {
 
   MATERIALS_PAGE_TITLE: 'Your Materials',
   MATERIALS_PAGE_DESC: 'Manage the materials available in the app',
+  MATERIALS_FIELD_TITLE: 'Title',
+  MATERIALS_FIELD_PRICE: 'Standard Price',
 
   SETTINGS_APP_THEME: 'App Theme',
   SETTINGS_DARK_THEME: 'Dark',
@@ -45,6 +47,7 @@ const en = {
   BUTTON_PREVIOUS: 'Previous',
   BUTTON_CANCEL: 'Cancel',
   BUTTON_CONFIRM: 'OK',
+  BUTTON_SAVE: 'Save',
 
   NO_ITEMS: 'List empty',
 

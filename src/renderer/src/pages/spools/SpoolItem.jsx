@@ -65,7 +65,7 @@ export default function SpoolItem(props) {
             />
           </Grid>
           <Grid item size={1}>
-            <IntlProvider locale={settings.locale} defaultLocale={'en'}>
+            <IntlProvider locale={settings.language} defaultLocale={'en'}>
               <Chip
                 variant="filled"
                 label={
