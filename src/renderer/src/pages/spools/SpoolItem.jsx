@@ -1,4 +1,8 @@
-import { Chip, Grid, ListItem, Paper, Typography } from '@mui/material'
+import { Chip, Grid, IconButton, ListItem, Paper, Tooltip, Typography } from '@mui/material'
+import { Icon } from '@iconify/react'
+import showDeleteDialog from '../../components/dialogs/DeleteItemDialog'
+import { useDispatch } from 'react-redux'
+import { useTranslation } from 'react-i18next'
 
 /**
  *
@@ -7,10 +11,42 @@ import { Chip, Grid, ListItem, Paper, Typography } from '@mui/material'
  * @constructor
  */
 export default function SpoolItem(props) {
+  const dispatch = useDispatch()
+  const { t } = useTranslation()
+
   return (
-    <ListItem>
-      <Paper elevation={2} className={'listItem'}>
-        <Grid container spacing={1}>
+    <Paper elevation={2} style={{ marginBottom: '12px' }}>
+      <ListItem
+        className={'listItem'}
+        secondaryAction={
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <IconButton
+              onClick={() => {
+                props.editAction(props.model.spool_id)
+              }}
+            >
+              <Tooltip title={t('TOOLTIP_EDIT')}>
+                <Icon icon={'mdi:edit'} />
+              </Tooltip>
+            </IconButton>
+            <IconButton
+              onClick={() => {
+                showDeleteDialog({
+                  dispatch,
+                  confirmAction: () => {
+                    props.deleteAction(props.model.spool_id)
+                  }
+                })
+              }}
+            >
+              <Tooltip title={t('TOOLTIP_DELETE')}>
+                <Icon icon={'mdi:trash'} />
+              </Tooltip>
+            </IconButton>
+          </div>
+        }
+      >
+        <Grid container spacing={1} style={{ width: '100%' }}>
           <Grid item size={12}>
             <Typography>{props.model.spool_title}</Typography>
           </Grid>
@@ -32,7 +68,7 @@ export default function SpoolItem(props) {
             />
           </Grid>
         </Grid>
-      </Paper>
-    </ListItem>
+      </ListItem>
+    </Paper>
   )
 }

@@ -17,6 +17,12 @@ const en = {
 
   SPOOL_PAGE_TITLE: 'Your Spools',
   SPOOL_PAGE_DESC: 'Manage the list of spools',
+  SPOOL_FIELD_TITLE: 'Title',
+  SPOOL_FIELD_MATERIAL: 'Material',
+  SPOOL_FIELD_COLOR: 'Color',
+  SPOOL_FIELD_SIZE: 'Spool Size',
+  SPOOL_FIELD_QTY: 'Quantity',
+  SPOOL_FIELD_PRICE: 'Price',
 
   MATERIALS_PAGE_TITLE: 'Your Materials',
   MATERIALS_PAGE_DESC: 'Manage the materials available in the app',
@@ -32,10 +38,18 @@ const en = {
   DIALOG_DELETE_TEXT: 'Are you sure you want to delete the selected item?',
   DELETE_SUCCESS: 'Deleted',
 
+  DIALOG_ADD: 'Add item',
+  DIALOG_ADD_TEXT: 'Add a new item into the database',
+
   BUTTON_NEXT: 'Next',
   BUTTON_PREVIOUS: 'Previous',
   BUTTON_CANCEL: 'Cancel',
-  BUTTON_CONFIRM: 'OK'
+  BUTTON_CONFIRM: 'OK',
+
+  NO_ITEMS: 'List empty',
+
+  EUR: '€',
+  USD: '$'
 }
 
 export default en

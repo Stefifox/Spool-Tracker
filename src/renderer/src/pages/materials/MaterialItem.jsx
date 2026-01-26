@@ -15,42 +15,42 @@ export default function MaterialItem(props) {
   const dispatch = useDispatch()
 
   return (
-    <ListItem
-      secondaryAction={
-        <>
-          <IconButton
-            onClick={() => {
-              props.editAction(props.model.mat_id)
-            }}
-          >
-            <Tooltip title={t('TOOLTIP_EDIT')}>
-              <Icon icon={'mdi:edit'} />
-            </Tooltip>
-          </IconButton>
-          <IconButton
-            onClick={() => {
-              showDeleteDialog({
-                dispatch,
-                confirmAction: () => {
-                  props.deleteAction(props.model.mat_id)
-                }
-              })
-            }}
-          >
-            <Tooltip title={t('TOOLTIP_DELETE')}>
-              <Icon icon={'mdi:trash'} />
-            </Tooltip>
-          </IconButton>
-        </>
-      }
-    >
-      <Paper elevation={2} className={'listItem'}>
+    <Paper elevation={2} style={{ marginBottom: '12px' }}>
+      <ListItem
+        secondaryAction={
+          <>
+            <IconButton
+              onClick={() => {
+                props.editAction(props.model.mat_id)
+              }}
+            >
+              <Tooltip title={t('TOOLTIP_EDIT')}>
+                <Icon icon={'mdi:edit'} />
+              </Tooltip>
+            </IconButton>
+            <IconButton
+              onClick={() => {
+                showDeleteDialog({
+                  dispatch,
+                  confirmAction: () => {
+                    props.deleteAction(props.model.mat_id)
+                  }
+                })
+              }}
+            >
+              <Tooltip title={t('TOOLTIP_DELETE')}>
+                <Icon icon={'mdi:trash'} />
+              </Tooltip>
+            </IconButton>
+          </>
+        }
+      >
         <Grid container spacing={1}>
           <Grid size={12}>
             <Typography>{props.model.mat_title}</Typography>
           </Grid>
         </Grid>
-      </Paper>
-    </ListItem>
+      </ListItem>
+    </Paper>
   )
 }
