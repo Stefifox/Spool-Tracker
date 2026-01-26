@@ -11,7 +11,7 @@ const tables = [
   {
     name: 'tab_spools',
     query:
-      'CREATE TABLE IF NOT EXISTS tab_spools (spool_id INTEGER PRIMARY KEY AUTOINCREMENT, spool_title TEXT NOT NULL, spool_mat_id INTEGER NOT NULL, spool_color TEXT NULL, spool_size INTEGER NULL, spool_qty INTEGER NULL, spool_price DECIMAL NULL);'
+      "CREATE TABLE IF NOT EXISTS tab_spools (spool_id INTEGER PRIMARY KEY AUTOINCREMENT, spool_title TEXT NOT NULL, spool_mat_id INTEGER NOT NULL, spool_color TEXT NULL default '#ffffff', spool_size INTEGER NULL, spool_qty INTEGER NULL default 1, spool_price DECIMAL NULL);"
   },
   {
     name: 'tab_materials',
