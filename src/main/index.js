@@ -11,6 +11,12 @@ import {
 } from '../backend/database'
 import icon from '../../resources/icon.png?asset'
 
+function handleSetTitle(event, title) {
+  const webContents = event.sender
+  const win = BrowserWindow.fromWebContents(webContents)
+  win.setTitle(title)
+}
+
 function createWindow() {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
@@ -36,10 +42,6 @@ function createWindow() {
     return { action: 'deny' }
   })
 
-  ipcMain.handle('app:setTitle', (event, title) => {
-    return mainWindow.setTitle(title)
-  })
-
   // HMR for renderer base on electron-vite cli.
   // Load the remote URL for development or the local html file for production.
   if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
@@ -55,7 +57,11 @@ function createWindow() {
 app.whenReady().then(() => {
   prepareApp()
   // Set app user model id for windows
-  electronApp.setAppUserModelId('com.electron')
+  electronApp.setAppUserModelId('it.electron')
+
+  ipcMain.handle('app:setTitle', (event, title) => {
+    return handleSetTitle(event, title)
+  })
 
   ipcMain.handle('db:selectData', async (event, { tableName, selectObject }) => {
     return selectData(tableName, selectObject)
