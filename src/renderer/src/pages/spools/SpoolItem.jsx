@@ -1,8 +1,11 @@
 import { Chip, Grid, IconButton, ListItem, Paper, Tooltip, Typography } from '@mui/material'
 import { Icon } from '@iconify/react'
-import showDeleteDialog from '../../components/dialogs/DeleteItemDialog'
-import { useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
+import { useDispatch } from 'react-redux'
+
+import showDeleteDialog from '../../components/dialogs/DeleteItemDialog'
+import { useSettings } from '../../hooks'
+import { FormattedNumber, IntlProvider } from 'react-intl'
 
 /**
  *
@@ -13,6 +16,7 @@ import { useTranslation } from 'react-i18next'
 export default function SpoolItem(props) {
   const dispatch = useDispatch()
   const { t } = useTranslation()
+  const { settings } = useSettings()
 
   return (
     <Paper elevation={2} style={{ marginBottom: '12px' }}>
@@ -61,11 +65,19 @@ export default function SpoolItem(props) {
             />
           </Grid>
           <Grid item size={1}>
-            <Chip
-              variant="filled"
-              label={`${props.model.spool_price}€`}
-              style={{ width: '100%' }}
-            />
+            <IntlProvider locale={settings.locale} defaultLocale={'en'}>
+              <Chip
+                variant="filled"
+                label={
+                  <FormattedNumber
+                    value={props.model.spool_price}
+                    style={'currency'}
+                    currency={settings.currency}
+                  />
+                }
+                style={{ width: '100%' }}
+              />
+            </IntlProvider>
           </Grid>
         </Grid>
       </ListItem>
