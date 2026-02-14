@@ -29,10 +29,6 @@ function UpdateItemDialog(props) {
   }
 
   const saveClick = () => {
-    console.log({
-      values: model,
-      where: { column: keyColumn, type: 'equals', value: model[keyColumn] }
-    })
     database
       .updData({
         values: model,
@@ -40,7 +36,7 @@ function UpdateItemDialog(props) {
       })
       .then(() => {
         reload()
-        dispatch(showSuccess)
+        dispatch(showSuccess())
         dispatch(closeDialog())
       })
       .catch((err) => {

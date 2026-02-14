@@ -26,7 +26,7 @@ export default function SpoolItem(props) {
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             <IconButton
               onClick={() => {
-                props.editAction(props.model.spool_id)
+                props.editAction(props.model)
               }}
             >
               <Tooltip title={t('TOOLTIP_EDIT')}>

@@ -9,6 +9,7 @@ import { showError, showSuccess } from '../../slices/messageSlice'
 import SpoolItem from './SpoolItem'
 import { closeDialog } from '../../slices/dialogsSlice'
 import showAddItemDialog from '../../components/dialogs/AddItemDialog'
+import showUpdateItemDialog from '../../components/dialogs/UpdateItemDialog'
 
 export default function SpoolPage() {
   const spoolView = useDatabase('v_spools')
@@ -31,6 +32,17 @@ export default function SpoolPage() {
       .catch((e) => {
         dispatch(showError(e))
       })
+  }
+
+  const editSpool = (model) => {
+    showUpdateItemDialog({
+      dispatch,
+      database: spoolTable,
+      reload: setReload,
+      type: 'spools',
+      keyColumn: 'spool_id',
+      defaultModel: model
+    })
   }
 
   const addSpool = () => {
@@ -77,7 +89,7 @@ export default function SpoolPage() {
         {!isLoading && (
           <List>
             {spoolList.map((v, k) => (
-              <SpoolItem key={k} model={v} deleteAction={deleteSpool} />
+              <SpoolItem key={k} model={v} deleteAction={deleteSpool} editAction={editSpool} />
             ))}
           </List>
         )}
