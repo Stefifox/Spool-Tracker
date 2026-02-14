@@ -1,5 +1,5 @@
 import * as sql from 'sqlite3'
-import {app} from 'electron'
+import { app } from 'electron'
 
 const db = new sql.Database(app.getPath('home') + '/SpollTrackerData.db')
 
@@ -136,24 +136,26 @@ async function updateData(tableName, updateObject) {
 
     const updVal = updateObject.values
 
-    const columns = Object.keys(updVal)
+    getColumns(tableName).then((validColumns) => {
+      const columns = Object.keys(updVal)
 
-    const updList = []
-    columns.forEach((col) => {
-      updList.push(`${col} = '${updVal[col]}'`)
+      const updList = []
+      columns.forEach((col) => {
+        if (validColumns.includes(col)) updList.push(`${col} = '${updVal[col]}'`)
+      })
+
+      const query =
+        `UPDATE ${tableName} SET ${updList.join(', ')} ` +
+        (updateObject.where ? buildWhere(updateObject.where) : '')
+
+      execute(query)
+        .then((res) => {
+          return resolve(res)
+        })
+        .catch((err) => {
+          return reject(err)
+        })
     })
-
-    const query =
-      `UPDATE ${tableName} SET ${updList.join(', ')} ` +
-      (updateObject.where ? buildWhere(updateObject.where) : '')
-
-    execute(query)
-      .then((res) => {
-        return resolve(res)
-      })
-      .catch((err) => {
-        return reject(err)
-      })
   })
 }
 
@@ -229,6 +231,18 @@ function buildWhere(whereObject) {
   })
 
   return whereClause
+}
+
+async function getColumns(table) {
+  return new Promise((resolve, reject) => {
+    execute(`PRAGMA table_info(${table});`)
+      .then((res) => {
+        return resolve(res.map((col) => col.name))
+      })
+      .catch((err) => {
+        return reject(err)
+      })
+  })
 }
 
 function extractKeys(obj) {
